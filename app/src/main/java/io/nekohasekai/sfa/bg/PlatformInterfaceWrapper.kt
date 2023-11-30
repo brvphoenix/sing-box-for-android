@@ -1,6 +1,8 @@
 package io.nekohasekai.sfa.bg
 
 import android.content.pm.PackageManager
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Process
 import androidx.annotation.RequiresApi
@@ -9,6 +11,7 @@ import io.nekohasekai.libbox.NetworkInterfaceIterator
 import io.nekohasekai.libbox.PlatformInterface
 import io.nekohasekai.libbox.StringIterator
 import io.nekohasekai.libbox.TunOptions
+import io.nekohasekai.libbox.WIFIState
 import io.nekohasekai.sfa.Application
 import java.net.Inet6Address
 import java.net.InetSocketAddress
@@ -18,7 +21,6 @@ import java.util.Enumeration
 import io.nekohasekai.libbox.NetworkInterface as LibboxNetworkInterface
 
 interface PlatformInterfaceWrapper : PlatformInterface {
-
     override fun usePlatformAutoDetectInterfaceControl(): Boolean {
         return true
     }
@@ -99,6 +101,17 @@ interface PlatformInterfaceWrapper : PlatformInterface {
     }
 
     override fun clearDNSCache() {
+    }
+
+    override fun readWIFIState(): WIFIState {
+        @Suppress("DEPRECATION")
+        val wifiInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val net = Application.connectivity.getActiveNetwork()
+            Application.connectivity.getNetworkCapabilities(net)!!.getTransportInfo()!! as WifiInfo
+        } else {
+            Application.wifiManager.getConnectionInfo()!!
+        }
+        return WIFIState(wifiInfo.getSSID()!!.removeSurrounding("\""), wifiInfo.getBSSID())
     }
 
     private class InterfaceArray(private val iterator: Enumeration<NetworkInterface>) :

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.VpnService
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
@@ -186,6 +187,10 @@ class MainActivity : AbstractActivity(), ServiceConnection.Callback {
         if (!ServiceNotification.checkPermission()) {
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             return
+        }
+        if (Application.application.checkSelfPermission(
+            Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            this@MainActivity.requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         }
         lifecycleScope.launch(Dispatchers.IO) {
             if (Settings.rebuildServiceMode()) {
