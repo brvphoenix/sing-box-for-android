@@ -42,7 +42,7 @@ jobs:
 
     - name: Cache Libbox
       id: cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ${{ github.workspace }}/sing-box-for-android/app/libs/libbox.aar
@@ -57,7 +57,7 @@ jobs:
         go-version: '^1.21'
         cache: false
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       if: steps.cache.outputs.cache-hit != 'true'
       with:
         path: |
@@ -87,7 +87,7 @@ jobs:
         path: sing-box-for-android
 
     - name: Cache Libbox
-      uses: actions/cache/restore@v3
+      uses: actions/cache/restore@v4
       with:
         path: |
           ${{ github.workspace }}/sing-box-for-android/app/libs/libbox.aar
@@ -97,7 +97,7 @@ jobs:
     - run: echo "JAVA_HOME=${JAVA_HOME_21_X64}" >> ${GITHUB_ENV}
 
     - name: Cache Gradle
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
