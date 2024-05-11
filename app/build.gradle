@@ -11,7 +11,7 @@ plugins {
 android {
     namespace "io.nekohasekai.sfa"
     compileSdk 34
-    ndkVersion System.getenv("NDK_VERSION")
+    ndkVersion System.getenv("NDK_VERSION") ?: "26.2.11394342"
 
     ksp {
         arg("room.incremental", "true")
