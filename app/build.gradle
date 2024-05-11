@@ -12,7 +12,7 @@ android {
     namespace "io.nekohasekai.sfa"
     compileSdk 35
 
-    ndkVersion System.getenv("NDK_VERSION")
+    ndkVersion System.getenv("NDK_VERSION") ?: "26.2.11394342"
 
     def ndkPathFromEnv = System.getenv("ANDROID_NDK_HOME")
     if (ndkPathFromEnv != null) {
