@@ -147,10 +147,13 @@ jobs:
         echo "GO_VERSION=$(go version | cut -d' ' -f3)" >> version.properties
         ./gradlew :app:assembleOtherRelease --parallel --configure-on-demand --info
         ./gradlew --stop
-        mkdir -p ../release
-        cp ./app/build/outputs/apk/other/release/*.apk ../release/
+        #mkdir -p ../release
+        pwd
+        #cp ./app/build/outputs/apk/other/release/*.apk ../release/
 
-    - run: find sing-box-for-android -iname '*.apk';
+    - run: |
+        mkdir -p release
+        cp sing-box-for-android/app/build/outputs/apk/other/release/*.apk ./release/
     
     - run: npm i @actions/artifact@^6
 
