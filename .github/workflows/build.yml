@@ -153,6 +153,7 @@ jobs:
 
     - run: |
         mkdir -p release
+        find sing-box-for-android -iname '*.apk'-exec ls -lha {} \;
         cp sing-box-for-android/app/build/outputs/apk/other/release/*.apk ./release/
     
     - run: npm i @actions/artifact@^6
