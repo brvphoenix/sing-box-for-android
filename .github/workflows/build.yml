@@ -138,6 +138,7 @@ jobs:
       run: |
         cd sing-box-for-android
         echo "sdk.dir=${ANDROID_HOME}" > local.properties
+        echo "ndk.dir=${ANDROID_NDK_HOME}" > local.properties
         echo "${KEYSTORE_PROPERTIES}" | base64 -d > keystore.properties
         echo "VERSION_CODE=$(date +%Y%m%d)$(printf '%02d' ${VERSION_CODE_MINOR:-1})" > version.properties
         echo "VERSION_NAME=${VERSION_NAME}" >> version.properties
