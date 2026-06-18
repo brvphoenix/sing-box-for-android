@@ -25,7 +25,7 @@ jobs:
       version-name: ${{ steps.parse-vars.outputs.versionName }}
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         ref: test-main-ech
         repository: ${{ github.repository_owner }}/sing-box
@@ -95,7 +95,7 @@ jobs:
       - libbox
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         path: sing-box-for-android
 
