@@ -155,12 +155,12 @@ jobs:
     - run: npm i @actions/artifact@^5
 
     - name: Upload Artifacts
-      uses: actions/github-script@v8
+      uses: actions/github-script@v9
       env:
         RootDirectory: ${{ github.workspace }}/release
       with:
         script: |
-          const { DefaultArtifactClient } = require('@actions/artifact');
+          import {DefaultArtifactClient} from '@actions/artifact'
           const fs = require('fs');
 
           const artifact = new DefaultArtifactClient();
