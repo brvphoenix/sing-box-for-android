@@ -160,7 +160,7 @@ jobs:
         RootDirectory: ${{ github.workspace }}/release
       with:
         script: |
-          import {DefaultArtifactClient} from '@actions/artifact'
+          const { DefaultArtifactClient } = require('@actions/artifact');
           const fs = require('fs');
 
           const artifact = new DefaultArtifactClient();
