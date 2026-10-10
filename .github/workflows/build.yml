@@ -152,7 +152,7 @@ jobs:
         mkdir -p ../release
         cp ./app/build/outputs/apk/other/release/*.apk ../release/
 
-    - run: npm i @actions/artifact@^5
+    - run: npm i -g @actions/artifact@^5
 
     - name: Upload Artifacts
       uses: actions/github-script@v9
@@ -160,7 +160,7 @@ jobs:
         RootDirectory: ${{ github.workspace }}/release
       with:
         script: |
-          import {DefaultArtifactClient} from '@actions/artifact'
+          const { DefaultArtifactClient } = require('@actions/artifact');
           const fs = require('fs');
 
           const artifact = new DefaultArtifactClient();
